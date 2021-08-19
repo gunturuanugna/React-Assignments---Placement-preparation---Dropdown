@@ -140,13 +140,35 @@ const states = [{
 
 function App() 
 {
+	const [selectedState, setSelectedState] = useState(0);
+	const [selectedCity, setSelectedCity] = useState(0);
+	const [selectedLandmark, setSelectedLandmark] = useState(0);
+	// let statesList=states.map((val)=>val.name);
+	let handleStateChange = (val) => {
+	  console.log(val);
+	  setSelectedState(val);
+	};
+	let handleCityChange = (val) => {
+	  // console.log(val);
+	  setSelectedCity(val);
+	};
+	let handleLandmarkChange = (val) => {
+	  // console.log(val);
+	  setSelectedLandmark(val);
+	};
 	// Do not alter/remove main div
 	return (
 	<div id="main">
-		
+		 <Select id="state" onChange={handleStateChange} optionList={states} />
+      <br />
+      <Select id="city" onChange={handleCityChange} optionList={states[selectedState].city} />
+      <br />
+      <Select id="landmark" onChange={handleLandmarkChange} optionList={states[selectedState].city[selectedCity].landmarks} />
+      <Description id='state' name={states[selectedState].name} desc={states[selectedState].description}/>
+      <Description id='city' name={states[selectedState].city[selectedCity].name} desc={states[selectedState].city.[selectedCity].description}/>
+      <Description id='landmark' name={states[selectedState].city[selectedCity].landmarks[selectedLandmark].name} desc={states[selectedState].city[selectedCity].landmarks[selectedLandmark].description}/>
 	</div>
 	);
 }
-
 
 export default App;
